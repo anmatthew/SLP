@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>PDF Viewer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+    embed, iframe, object {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    .fallback {
+      display: none;
+      color: #eee;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+      line-height: 1.5;
+    }
+    .fallback a {
+      color: #4da3ff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Change "document.pdf" to your actual PDF filename -->
+  <embed
+    src="opentext-ca-slp-price-list-en.pdf"
+    type="application/pdf"
+    width="100%"
+    height="100%"
+  />
+
+  <!-- Shown only if the browser cannot embed PDFs -->
+  <div class="fallback" id="fallback">
+    <p>Unable to display the PDF in this browser.</p>
+    <p><a href="opentext-ca-slp-price-list-en.pdf" target="_blank" rel="noopener">Open or download the PDF</a></p>
+  </div>
+
+  <script>
+    // Simple fallback if embed fails to load
+    const embed = document.querySelector("embed");
+    const fallback = document.getElementById("fallback");
+    embed.addEventListener("error", () => {
+      embed.style.display = "none";
+      fallback.style.display = "block";
+    });
+  </script>
+</body>
+</html>
