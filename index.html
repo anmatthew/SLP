@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+<! -- 
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PDF Viewer</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,7 +16,7 @@
     #viewer {
       width: 100%;
       height: 100%;
-      border: none;
+      border: 0;
       display: block;
     }
     .fallback {
@@ -29,14 +30,16 @@
     .fallback a { color: #4da3ff; }
     .bar {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 2;
       display: flex;
       gap: 12px;
       align-items: center;
       justify-content: flex-end;
       padding: 8px 12px;
-      background: rgba(0,0,0,0.55);
+      background: rgba(0, 0, 0, 0.55);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-size: 14px;
     }
@@ -44,37 +47,36 @@
   </style>
 </head>
 <body>
-  <!-- Change this filename if the PDF is renamed -->
-  <script>
-    const PDF_FILE = "opentext-ca-slp-price-list-en.pdf";
-  </script>
-
   <div class="bar">
-    <a id="openLink" href="#" target="_blank" rel="noopener">Open PDF</a>
-    <a id="downloadLink" href="#" download>Download</a>
+    <a id="openLink" href="opentext-ca-slp-price-list-en.pdf" target="_blank" rel="noopener">Open PDF</a>
+    <a id="downloadLink" href="opentext-ca-slp-price-list-en.pdf" download="opentext-ca-slp-price-list-en.pdf">Download</a>
   </div>
 
   <iframe
     id="viewer"
     title="PDF Viewer"
-    type="application/pdf"
+    src="opentext-ca-slp-price-list-en.pdf"
   ></iframe>
 
   <div class="fallback" id="fallback">
     <p>Unable to display the PDF in this browser.</p>
-    <p><a id="fallbackLink" href="#" target="_blank" rel="noopener">Open or download the PDF</a></p>
+    <p>
+      <a id="fallbackLink" href="opentext-ca-slp-price-list-en.pdf" target="_blank" rel="noopener">
+        Open or download the PDF
+      </a>
+    </p>
   </div>
 
   <script>
+    const PDF_FILE = "opentext-ca-slp-price-list-en.pdf";
+    const encoded = encodeURI(PDF_FILE);
+
     const viewer = document.getElementById("viewer");
     const fallback = document.getElementById("fallback");
-    const encoded = encodeURI(PDF_FILE);
 
     document.getElementById("openLink").href = encoded;
     document.getElementById("downloadLink").href = encoded;
     document.getElementById("fallbackLink").href = encoded;
-
-    // iframe is more reliable than <embed> for large / newly exported PDFs
     viewer.src = encoded;
 
     function showFallback() {
@@ -84,7 +86,6 @@
 
     viewer.addEventListener("error", showFallback);
 
-    // embed/iframe often do NOT fire "error" when the PDF path is wrong
     fetch(encoded, { method: "HEAD" })
       .then((res) => {
         if (!res.ok) showFallback();
