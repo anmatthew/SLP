@@ -4,7 +4,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Opentext Public Secctor Price List</title>
+
+  <title>OpenText Public Sector SLP Price List | Government Pricing</title>
+  <meta name="description" content="Official OpenText public sector / SLP price list. View or download current OpenText SLP list prices, state contract pricing, and related software SKUs.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://pricelist.opentextslp.com/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pricelist.opentextslp.com/">
+  <meta property="og:title" content="OpenText Public Sector SLP Price List">
+  <meta property="og:description" content="View and download the Government OpenText SLP / public sector price list.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="OpenText Public Sector SLP Price List">
+  <meta name="twitter:description" content="Official OpenText SLP price list for public sector pricing.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "OpenText Public Sector SLP Price List",
+    "url": "https://pricelist.opentextslp.com/",
+    "description": "Official OpenText public sector SLP price list for viewing and download.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "OpenText SLP Price List",
+      "url": "https://pricelist.opentextslp.com/"
+    },
+    "about": {
+      "@type": "Dataset",
+      "name": "OpenText SLP Price List",
+      "encodingFormat": "application/pdf",
+      "url": "https://pricelist.opentextslp.com/opentext-ca-slp-price-list-en.pdf"
+    }
+  }
+  </script>
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
@@ -37,35 +71,75 @@
       display: flex;
       gap: 12px;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
       padding: 8px 12px;
       background: rgba(0, 0, 0, 0.55);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-size: 14px;
     }
+    .bar h1 {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .bar-actions {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
     .bar a { color: #9ecbff; text-decoration: none; }
+    .seo-copy {
+      position: absolute;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
   </style>
 </head>
 <body>
-  <div class="bar">
-    <a id="openLink" href="opentext-ca-slp-price-list-en.pdf" target="_blank" rel="noopener">Open PDF</a>
-    <a id="downloadLink" href="opentext-ca-slp-price-list-en.pdf" download="opentext-ca-slp-price-list-en.pdf">Download</a>
-  </div>
+  <header class="bar">
+    <h1>OpenText Public Sector SLP Price List</h1>
+    <div class="bar-actions">
+      <a id="openLink" href="opentext-ca-slp-price-list-en.pdf" target="_blank" rel="noopener">Open PDF</a>
+      <a id="downloadLink" href="opentext-ca-slp-price-list-en.pdf" download="opentext-ca-slp-price-list-en.pdf">Download</a>
+    </div>
+  </header>
 
-  <iframe
-    id="viewer"
-    title="PDF Viewer"
-    src="opentext-ca-slp-price-list-en.pdf"
-  ></iframe>
+  <main>
+    <iframe
+      id="viewer"
+      title="OpenText Public Sector SLP Price List PDF"
+      src="opentext-ca-slp-price-list-en.pdf"
+    ></iframe>
 
-  <div class="fallback" id="fallback">
-    <p>Unable to display the PDF in this browser.</p>
+    <div class="fallback" id="fallback">
+      <p>Unable to display the PDF in this browser.</p>
+      <p>
+        <a id="fallbackLink" href="opentext-ca-slp-price-list-en.pdf" target="_blank" rel="noopener">
+          Open or download the OpenText SLP price list PDF
+        </a>
+      </p>
+    </div>
+  </main>
+
+  <section class="seo-copy">
+    <h2>Official OpenText SLP / public sector pricing</h2>
     <p>
-      <a id="fallbackLink" href="opentext-ca-slp-price-list-en.pdf" target="_blank" rel="noopener">
-        Open or download the PDF
-      </a>
+      This page hosts the OpenText public sector SLP price list
+      (opentext-ca-slp-price-list-en.pdf). Use it to view current OpenText list prices,
+      state contract pricing, and SLP prices for software licenses, maintenance,
+      Support, Implementation and Training SKUs.
     </p>
-  </div>
+    <p>
+      Download the OpenText SLP price list PDF:
+      <a href="opentext-ca-slp-price-list-en.pdf">OpenText SLP price list</a>.
+    </p>
+  </section>
 
   <script>
     const PDF_FILE = "opentext-ca-slp-price-list-en.pdf";
