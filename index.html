@@ -95,7 +95,8 @@
       flex-wrap: wrap;
     }
     .bar a,
-    .fallback a {
+    .fallback a,
+    footer a {
       color: var(--link);
       text-decoration: underline;
       min-height: 44px;
@@ -105,7 +106,8 @@
       padding: 8px 10px;
     }
     .bar a:hover,
-    .fallback a:hover {
+    .fallback a:hover,
+    footer a:hover {
       color: var(--link-hover);
     }
     a:focus-visible,
@@ -117,11 +119,11 @@
 
     main {
       width: 100%;
-      min-height: calc(100vh - 56px);
+      min-height: calc(100vh - 96px);
     }
     #viewer {
       width: 100%;
-      height: calc(100vh - 56px);
+      height: calc(100vh - 96px);
       min-height: 320px;
       border: 0;
       display: block;
@@ -132,6 +134,18 @@
       text-align: center;
       padding: 40px 20px;
       line-height: 1.5;
+    }
+
+    footer {
+      padding: 8px 12px;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      color: #ddd;
+      background: #111;
+      border-top: 1px solid #333;
+    }
+    footer p {
+      margin: 0;
     }
 
     .visually-hidden {
@@ -147,14 +161,13 @@
     }
 
     @media (max-width: 640px) {
-      #viewer { height: calc(100vh - 88px); }
+      #viewer { height: calc(100vh - 128px); }
     }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#viewer">Skip to price list</a>
-
-  <header class="bar">
+  <header class="bar" role="banner">
+    <a class="skip-link" href="#main-content">Skip to price list</a>
     <h1>OpenText Public Sector SLP Price List</h1>
     <nav class="bar-actions" aria-label="Price list file">
       <a id="openLink" href="opentext-ca-slp-price-list-en.pdf" target="_blank" rel="noopener">
@@ -168,7 +181,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main-content" role="main" aria-label="OpenText SLP price list">
     <p class="visually-hidden">
       This page embeds the OpenText government public sector SLP price list PDF.
       The embedded viewer may not be fully accessible. Use Open PDF or Download PDF
@@ -192,6 +205,10 @@
       </p>
     </div>
   </main>
+
+  <footer role="contentinfo">
+    <p>Official OpenText public sector SLP price list.</p>
+  </footer>
 
   <script>
     const PDF_FILE = "opentext-ca-slp-price-list-en.pdf";
@@ -226,6 +243,6 @@
         j.src = '//dockaccess.org/accessibility/' + t + '/start.js';
         f.parentNode.insertBefore(j, f);
     })(document, 'script', 'gxLLDrBNatcrNSkt0pl2');
-</script>
+  </script>
 </body>
 </html>
