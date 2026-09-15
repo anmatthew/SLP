@@ -34,110 +34,164 @@
   </script>
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #121212;
+      --bar-bg: #111111;
+      --text: #ffffff;
+      --link: #8ec8ff;
+      --link-hover: #c6e3ff;
+      --focus: #ffe566;
+    }
+
+    * { box-sizing: border-box; }
     html, body {
+      margin: 0;
+      padding: 0;
       width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #1a1a1a;
-    }
-    main {
-      width: 100%;
-      height: 100%;
-    }
-    #viewer {
-      width: 100%;
-      height: 100vh;
-      border: 0;
-      display: block;
-    }
-    .fallback {
-      display: none;
-      color: #eee;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      text-align: center;
-      padding: 60px 20px 40px;
-      line-height: 1.5;
     }
-    .fallback a { color: #4da3ff; }
+
+    .skip-link {
+      position: absolute;
+      left: 12px;
+      top: -48px;
+      z-index: 3;
+      padding: 8px 12px;
+      background: var(--focus);
+      color: #111;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      top: 12px;
+    }
+
     .bar {
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
       z-index: 2;
       display: flex;
       gap: 12px;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       padding: 8px 12px;
-      background: rgba(0, 0, 0, 0.55);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 14px;
+      background: var(--bar-bg);
+      border-bottom: 1px solid #333;
     }
     .bar h1 {
-      color: #fff;
-      font-size: 14px;
-      font-weight: 600;
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.3;
+      font-weight: 700;
       margin: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
     .bar-actions {
       display: flex;
-      gap: 12px;
-      flex-shrink: 0;
+      gap: 8px;
+      flex-wrap: wrap;
     }
-    .bar a { color: #9ecbff; text-decoration: none; }
-    .seo-copy {
+    .bar a,
+    .fallback a {
+      color: var(--link);
+      text-decoration: underline;
+      min-height: 44px;
+      min-width: 44px;
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 10px;
+    }
+    .bar a:hover,
+    .fallback a:hover {
+      color: var(--link-hover);
+    }
+    a:focus-visible,
+    iframe:focus-visible,
+    .skip-link:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    main {
+      width: 100%;
+      min-height: calc(100vh - 56px);
+    }
+    #viewer {
+      width: 100%;
+      height: calc(100vh - 56px);
+      min-height: 320px;
+      border: 0;
+      display: block;
+      background: var(--bg);
+    }
+    .fallback {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      line-height: 1.5;
+    }
+
+    .visually-hidden {
       position: absolute;
-      left: -10000px;
       width: 1px;
       height: 1px;
+      padding: 0;
+      margin: -1px;
       overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 640px) {
+      #viewer { height: calc(100vh - 88px); }
     }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#viewer">Skip to price list</a>
+
   <header class="bar">
     <h1>OpenText Public Sector SLP Price List</h1>
-    <div class="bar-actions">
-      <a id="openLink" href="opentext-ca-slp-price-list-en.pdf" target="_blank" rel="noopener">Open PDF</a>
-      <a id="downloadLink" href="opentext-ca-slp-price-list-en.pdf" download="opentext-ca-slp-price-list-en.pdf">Download</a>
-    </div>
+    <nav class="bar-actions" aria-label="Price list file">
+      <a id="openLink" href="opentext-ca-slp-price-list-en.pdf" target="_blank" rel="noopener">
+        Open PDF
+        <span class="visually-hidden"> of the OpenText SLP price list (opens in a new tab)</span>
+      </a>
+      <a id="downloadLink" href="opentext-ca-slp-price-list-en.pdf" download="opentext-ca-slp-price-list-en.pdf">
+        Download PDF
+        <span class="visually-hidden"> of the OpenText SLP price list</span>
+      </a>
+    </nav>
   </header>
 
   <main>
+    <p class="visually-hidden">
+      This page embeds the OpenText government public sector SLP price list PDF.
+      The embedded viewer may not be fully accessible. Use Open PDF or Download PDF
+      for the complete document, including current list prices, state contract pricing,
+      and SLP prices for software licenses, maintenance, support, and training SKUs.
+    </p>
+
     <iframe
       id="viewer"
-      title="OpenText Public Sector SLP Price List PDF"
+      title="OpenText Public Sector SLP price list PDF viewer"
       src="opentext-ca-slp-price-list-en.pdf"
     ></iframe>
 
-    <div class="fallback" id="fallback">
-      <p>Unable to display the PDF in this browser.</p>
+    <div class="fallback" id="fallback" role="status">
+      <p>The PDF viewer could not be displayed in this browser.</p>
       <p>
         <a id="fallbackLink" href="opentext-ca-slp-price-list-en.pdf" target="_blank" rel="noopener">
           Open or download the OpenText SLP price list PDF
+          <span class="visually-hidden"> (opens in a new tab)</span>
         </a>
       </p>
     </div>
   </main>
-
-  <section class="seo-copy">
-    <h2>OpenText SLP / public sector pricing</h2>
-    <p>
-      This page hosts the OpenText public sector SLP price list
-      (opentext-ca-slp-price-list-en.pdf). Use it to view current OpenText list prices,
-      state contract pricing, and SLP prices for software licenses, maintenance,
-      support, and related SKUs.
-    </p>
-    <p>
-      Download the OpenText Government SLP Price List PDF:
-      <a href="opentext-ca-slp-price-list-en.pdf">OpenText SLP price list</a>.
-    </p>
-  </section>
 
   <script>
     const PDF_FILE = "opentext-ca-slp-price-list-en.pdf";
